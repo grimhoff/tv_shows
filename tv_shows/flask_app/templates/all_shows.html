@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-primary">Welcome, {{user.first_name}}!</h2><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>All TV Shows:</h4>
+                </div>
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4 p-2 d-flex justify-content-end">
+                    <a href="/shows/create" class="btn btn-primary mr-2">Create</a>
+                    <a href="/logout" class="btn btn-success">Logout</a>
+                </div>
+                </div>
+            </div>
+
+        <div class="flex-container with-margins">
+            <table class="inline-flex w-100 mt-2 table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Network</th>
+                        <th>Release Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in shows %}
+                        <tr>
+                            <td>{{s.title}}</td>
+                            <td>{{s.network}}</td>
+                            <td>{{s.release_date}}</td>
+                            <td>
+                                {% if s.added_by_current_user %}
+                                    <a href="/shows/view/{{ s.id }}">Show</a> | 
+                                    <a href="/shows/edit/{{ s.id }}">Edit</a> | 
+                                    <a href="/shows/delete/{{ s.id }}">Delete</a>
+                                {% else %}
+                                    <a href="/shows/view/{{ s.id }}">Show</a> 
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
